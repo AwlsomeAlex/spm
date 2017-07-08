@@ -1,7 +1,7 @@
 #!/bin/sh
 # Created by AwlsomeAlex (GNU GPLv3)
 # Static-Get by Javier Lopez
-# Version Pre-0.1
+# Version 0.1
 
 ########################
 # Star Package Manager #
@@ -56,8 +56,7 @@ update_spm () {
 	echo "Removing old Star Package Manager Files..."
 	rm -rf /etc/spm/packages.txt
 	echo "Downloading latest Star Package Manager Files..."
-	# THIS IS A TEMPORARY DEVEL TREE DOWNLOAD LINK
-	wget https://raw.githubusercontent.com/AwlsomeAlex/StarLinux/devel/spm/packages.txt
+	wget https://raw.githubusercontent.com/AwlsomeAlex/spm/master/recipes/spm/packages.txt
 	echo "Installing Latest Star Package Manager Package Repository..."
 	cp packages.txt /etc/spm/packages.txt
 	rm -rf packages.txt
@@ -79,8 +78,7 @@ install_package () {
 	echo "Downloading $PACKAGE Installation Recipe..."
 	mkdir -p /tmp/spm
 	cd /tmp/spm
-	# THIS IS A TEMPORARY DEVEL TREE DOWNLOAD LINK
-	wget https://raw.githubusercontent.com/AwlsomeAlex/StarLinux/devel/spm/recipes/$PACKAGE.lib
+	wget https://raw.githubusercontent.com/AwlsomeAlex/spm/master/recipes/$PACKAGE.lib
 	if [ ! -f "$PACKAGE.lib" ] ; then
 		echo "Star Package Manager failed to retrieve the Installation Recipe. Please try again later."
 		rm -rf /tmp/spm
@@ -111,12 +109,10 @@ install_spm () {
 	mkdir /tmp/spm_download
 	cd /tmp/spm_download
 	echo "Downloading Latest Star Package Manager Executable (GIT)..."
-	# THIS IS A TEMPORARY DEVEL TREE DOWNLOAD LINK
-	wget https://raw.githubusercontent.com/AwlsomeAlex/StarLinux/devel/spm/spm.sh
+	wget https://raw.githubusercontent.com/AwlsomeAlex/spm/master/spm.sh
 	echo "Downloading Latest Star Package Manager Files (GIT)..."
-	# THIS IS A TEMPORARY DEVEL TREE DOWNLOAD LINK
-	wget https://raw.githubusercontent.com/AwlsomeAlex/StarLinux/devel/spm/packages.txt
-	wget https://raw.githubusercontent.com/AwlsomeAlex/StarLinux/devel/spm/help.txt
+	wget https://raw.githubusercontent.com/AwlsomeAlex/spm/master/recipes/spm/packages.txt
+	wget https://raw.githubusercontent.com/AwlsomeAlex/spm/master/recipes/spm/help.txt
 	echo "Downloading Latest Static-Get Script..."
 	wget http://s.minos.io/s
 	echo "Required Star Package Manager Files Downloaded."
@@ -143,7 +139,7 @@ if [ -f "./spm.sh" ]; then
 	install_spm
 fi
 
-if [ "$1" = "" -o "$1" = "-h" -o "$1" = "--help" ] ; then
+if [ "$1" = "" -o "$1" = "-h" -o "$1" = "help" ] ; then
 	display_help
 elif [[ "$1" = "$(grep -r "$1" "/etc/spm/packages.txt")" ]] ; then
 	PACKAGE=$1
