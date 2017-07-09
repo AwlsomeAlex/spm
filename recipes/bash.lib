@@ -27,7 +27,7 @@ install_bash () {
 	echo "Installing $PACKAGE Executable to Root Filesystem..."
 	cp bin/* /bin
 	echo "Configuring inittab for Bash..."
-	sed -i '3s/sh/bash/' /etc/inittab
+	sed -i '3s/sh/login/' /etc/inittab
 	echo "Configuring Bash Shell..."
 	echo "export PS1='\w\$ '" >> /etc/bashrc
 	touch ~/.bashrc
